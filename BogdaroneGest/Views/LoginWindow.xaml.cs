@@ -34,7 +34,8 @@ namespace BogdaroneGest
 			this.field_userName.InteractiveModeSwitch = () => {
 				if(string.Equals(
 					a: this.field_userName.Text,
-					b: USERNAME_FIELD_NAME)) {
+					b: USERNAME_FIELD_NAME))
+				{
 					this.field_userName.Text = string.Empty;
 					this.field_userName.Foreground = Brushes.Black;
 				}
@@ -50,7 +51,8 @@ namespace BogdaroneGest
 			this.field_password.InteractiveModeSwitch = () => {
 				if(string.Equals(
 					a: this.field_password.Text,
-					b: PASSWORD_FIELD_NAME)) {
+					b: PASSWORD_FIELD_NAME))
+				{
 					this.field_password.Text = string.Empty;
 					this.field_password.Foreground = Brushes.Black;
 				}
@@ -90,21 +92,22 @@ namespace BogdaroneGest
 
 		private void btn_login_Click(object sender, RoutedEventArgs e)
 		{
-			if(LoginCredentials.TryCreateFrom(this, out var credentials)) {
+			MessageBox.Show("Passowrd is: " + this.field_password._textValue);
+			//if(LoginCredentials.TryCreateFrom(this, out var credentials)) {
 
-				if(this.cbx_remember.IsChecked.Value) {
-					credentials.StoreLocally();
-				} else if(LoginCredentials.IsRememberedLocally()) {
-					LoginCredentials.ForgetLocallyStoredCredentials();
-				}
+			//	if(this.cbx_remember.IsChecked.Value) {
+			//		credentials.StoreLocally();
+			//	} else if(LoginCredentials.IsRememberedLocally()) {
+			//		LoginCredentials.ForgetLocallyStoredCredentials();
+			//	}
 
-				var mainWin = new Views.MainWindow();
+			//	var mainWin = new Views.MainWindow();
 
-				mainWin.Show();
-				this.Close();
+			//	mainWin.Show();
+			//	this.Close();
 
-				//MessageBox.Show($"Hello, {credentials.UserName}!");
-			}
+			//	//MessageBox.Show($"Hello, {credentials.UserName}!");
+			//}
 		}
 
 		private void btn_cancel_Click(object sender, RoutedEventArgs e)

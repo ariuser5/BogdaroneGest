@@ -9,8 +9,6 @@ namespace BogdaroneGest.UserControls
 	{
 
 
-
-		
 		public LoginWindowTextField()
 		{
 			this.InteractiveModeSwitch = () => { return; };

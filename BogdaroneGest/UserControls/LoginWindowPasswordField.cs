@@ -14,7 +14,7 @@ namespace BogdaroneGest.UserControls
 
 		const char DEFAULT_PW_CHAR = '*';
 
-		string _textValue;
+		internal string _textValue;
 		object _textChangedLock;
 		bool _interactiveMode;
 		bool _skipTextValidation;
@@ -27,7 +27,6 @@ namespace BogdaroneGest.UserControls
 			this._textValue = string.Empty;
 
 			this.PasswordChar = DEFAULT_PW_CHAR;
-
 			this.ValidInputTextHandler = (text) => { return; };
 
 			this.InvalidInputTextHandler = 
@@ -48,7 +47,7 @@ namespace BogdaroneGest.UserControls
 		public Action<string> InvalidInputTextHandler { get; set; }
 
 
-		
+
 		protected override void OnTextChanged(TextChangedEventArgs e)
 		{
 			lock(this._textChangedLock) {
@@ -74,14 +73,19 @@ namespace BogdaroneGest.UserControls
 
 		void ValidateTextChange(string text, TextChange changeInfo)
 		{
-			this.RemoveSelectedText(changeInfo);
+			var newCaretPosition = changeInfo.Offset + changeInfo.AddedLength;
+
+			this.RemoveOverwrittenText(changeInfo);
 
 			if(text.Any(c => char.IsWhiteSpace(c))) {
 				var encryptedText = new string(
 					c: this.PasswordChar,
 					count: this._textValue.Length);
 
-				this.SetTextPropertyWithoutEvent(encryptedText);
+				this.UpdateTextUIWithoutRaisingEvent(
+					value: encryptedText,
+					caretPosition: newCaretPosition);
+
 				this.InvalidInputTextHandler.Invoke(text);
 			} else {
 				var encryptedText = new string(
@@ -89,12 +93,16 @@ namespace BogdaroneGest.UserControls
 					count: this.Text.Length);
 
 				this.ApplyAddedText(text, changeInfo);
-				this.SetTextPropertyWithoutEvent(encryptedText);
+				
+				this.UpdateTextUIWithoutRaisingEvent(
+					value: encryptedText,
+					caretPosition: newCaretPosition);
+
 				this.ValidInputTextHandler.Invoke(text);
 			}
 		}
  
-		void RemoveSelectedText(TextChange changeInfo)
+		void RemoveOverwrittenText(TextChange changeInfo)
 		{
 			if(changeInfo.RemovedLength > 0) {
 				this._textValue = this._textValue
@@ -114,12 +122,14 @@ namespace BogdaroneGest.UserControls
 			}
 		}
 
-		void SetTextPropertyWithoutEvent(string text)
+		void UpdateTextUIWithoutRaisingEvent(string value, int caretPosition)
 		{
-			this._skipTextValidation = true;
-			this.Text = text;
-			this.CaretIndex = this.Text.Length;
-			this._skipTextValidation = false;
+			lock(this._textChangedLock) { 
+				this._skipTextValidation = true;
+				this.Text = value;
+				this.CaretIndex = caretPosition;
+				this._skipTextValidation = false;
+			}
 		}
 
 		protected override void SwitchToInteractiveMode()
