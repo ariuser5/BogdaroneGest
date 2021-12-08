@@ -11,39 +11,49 @@ namespace BogdaroneGest.UserControls
 
 		public LoginWindowTextField()
 		{
-			this.InteractiveModeSwitch = () => { return; };
-			this.FreeModeSwitch = () => { return; };
+			this.InteractiveModeSwitchHandler = () => { return; };
+			this.FreeModeSwitchHandler = () => { return; };
 		}
 
 
 
 		[Browsable(false)]
-		public Action InteractiveModeSwitch { get; set; }
+		public Action InteractiveModeSwitchHandler { get; set; }
 
 		[Browsable(false)]
-		public Action FreeModeSwitch { get; set; }
+		public Action FreeModeSwitchHandler { get; set; }
 
 
-		protected virtual void SwitchToInteractiveMode()
+
+		public void ToggleInteractiveMode(bool value)
 		{
-			this.InteractiveModeSwitch.Invoke();
+			if(value) {
+				this.OnInteractiveModeSwitch();
+			} else {
+				this.OnFreeModeSwitch();
+			}
 		}
 
-		protected virtual void SwitchToFreeMode()
+		protected virtual void OnInteractiveModeSwitch()
 		{
-			this.FreeModeSwitch.Invoke();
+			this.InteractiveModeSwitchHandler.Invoke();
+		}
+
+		protected virtual void OnFreeModeSwitch()
+		{
+			this.FreeModeSwitchHandler.Invoke();
 		}
 
 		protected override void OnGotFocus(RoutedEventArgs e)
 		{
-			this.SwitchToInteractiveMode();
+			this.OnInteractiveModeSwitch();
 			base.OnGotFocus(e);
 		}
 
 		protected override void OnLostFocus(RoutedEventArgs e)
 		{
 			base.OnLostFocus(e);
-			this.SwitchToFreeMode();
+			this.OnFreeModeSwitch();
 		}
 
 

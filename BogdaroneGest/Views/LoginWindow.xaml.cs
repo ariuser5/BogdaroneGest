@@ -31,7 +31,7 @@ namespace BogdaroneGest
 				= this.field_password.BorderBrush;
 
 
-			this.field_userName.InteractiveModeSwitch = () => {
+			this.field_userName.InteractiveModeSwitchHandler = () => {
 				if(string.Equals(
 					a: this.field_userName.Text,
 					b: USERNAME_FIELD_NAME))
@@ -41,14 +41,14 @@ namespace BogdaroneGest
 				}
 			};
 
-			this.field_userName.FreeModeSwitch = () => {
+			this.field_userName.FreeModeSwitchHandler = () => {
 				if(string.IsNullOrWhiteSpace(this.field_userName.Text)) {
 					this.field_userName.Text = USERNAME_FIELD_NAME;
 					this.field_userName.Foreground = presetUserNameFieldTextColor;
 				}
 			};
 
-			this.field_password.InteractiveModeSwitch = () => {
+			this.field_password.InteractiveModeSwitchHandler = () => {
 				if(string.Equals(
 					a: this.field_password.Text,
 					b: PASSWORD_FIELD_NAME))
@@ -58,7 +58,7 @@ namespace BogdaroneGest
 				}
 			};
 
-			this.field_password.FreeModeSwitch = () => {
+			this.field_password.FreeModeSwitchHandler = () => {
 				if(string.IsNullOrWhiteSpace(this.field_password.Text)) {
 					this.field_password.Text = PASSWORD_FIELD_NAME;
 					this.field_password.Foreground = presetPasswordFieldTextColor;
@@ -80,8 +80,8 @@ namespace BogdaroneGest
 			if(LoginCredentials.IsRememberedLocally()) {
 				var remembered = LoginCredentials.ImportRemembered();
 
-				this.field_userName.InteractiveModeSwitch();
-				this.field_password.InteractiveModeSwitch();
+				this.field_userName.ToggleInteractiveMode(true);
+				this.field_password.ToggleInteractiveMode(true);
 
 				this.field_userName.Text = remembered.UserName;
 				this.field_password.Text = remembered.Password;
@@ -92,22 +92,22 @@ namespace BogdaroneGest
 
 		private void btn_login_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Passowrd is: " + this.field_password._textValue);
-			//if(LoginCredentials.TryCreateFrom(this, out var credentials)) {
+			//MessageBox.Show("Passowrd is: " + this.field_password._textValue);
+			if(LoginCredentials.TryCreateFrom(this, out var credentials)) {
 
-			//	if(this.cbx_remember.IsChecked.Value) {
-			//		credentials.StoreLocally();
-			//	} else if(LoginCredentials.IsRememberedLocally()) {
-			//		LoginCredentials.ForgetLocallyStoredCredentials();
-			//	}
+				if(this.cbx_remember.IsChecked.Value) {
+					credentials.StoreLocally();
+				} else if(LoginCredentials.IsRememberedLocally()) {
+					LoginCredentials.ForgetLocallyStoredCredentials();
+				}
 
-			//	var mainWin = new Views.MainWindow();
+				var mainWin = new Views.MainWindow();
 
-			//	mainWin.Show();
-			//	this.Close();
+				mainWin.Show();
+				this.Close();
 
-			//	//MessageBox.Show($"Hello, {credentials.UserName}!");
-			//}
+				//MessageBox.Show($"Hello, {credentials.UserName}!");
+			}
 		}
 
 		private void btn_cancel_Click(object sender, RoutedEventArgs e)

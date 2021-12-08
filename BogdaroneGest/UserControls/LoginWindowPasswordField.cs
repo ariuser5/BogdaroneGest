@@ -14,7 +14,6 @@ namespace BogdaroneGest.UserControls
 
 		const char DEFAULT_PW_CHAR = '*';
 
-		internal string _textValue;
 		object _textChangedLock;
 		bool _interactiveMode;
 		bool _skipTextValidation;
@@ -24,9 +23,9 @@ namespace BogdaroneGest.UserControls
 			this._textChangedLock = new object();
 			this._skipTextValidation = false;
 			this._interactiveMode = false;
-			this._textValue = string.Empty;
 
 			this.PasswordChar = DEFAULT_PW_CHAR;
+			this.HiddentTextValue = string.Empty;
 			this.ValidInputTextHandler = (text) => { return; };
 
 			this.InvalidInputTextHandler = 
@@ -39,13 +38,14 @@ namespace BogdaroneGest.UserControls
 
 		public char PasswordChar { get; set; }
 
+		[Browsable(false)]
+		public string HiddentTextValue { get; set; }
 
 		[Browsable(false)]
 		public Action<string> ValidInputTextHandler { get; set; }
 
 		[Browsable(false)]
 		public Action<string> InvalidInputTextHandler { get; set; }
-
 
 
 		protected override void OnTextChanged(TextChangedEventArgs e)
@@ -80,7 +80,7 @@ namespace BogdaroneGest.UserControls
 			if(text.Any(c => char.IsWhiteSpace(c))) {
 				var encryptedText = new string(
 					c: this.PasswordChar,
-					count: this._textValue.Length);
+					count: this.HiddentTextValue.Length);
 
 				this.UpdateTextUIWithoutRaisingEvent(
 					value: encryptedText,
@@ -105,7 +105,7 @@ namespace BogdaroneGest.UserControls
 		void RemoveOverwrittenText(TextChange changeInfo)
 		{
 			if(changeInfo.RemovedLength > 0) {
-				this._textValue = this._textValue
+				this.HiddentTextValue = this.HiddentTextValue
 					.Remove(changeInfo.Offset, changeInfo.RemovedLength);
 			}
 		}
@@ -113,10 +113,10 @@ namespace BogdaroneGest.UserControls
 		void ApplyAddedText(string addedText, TextChange changeInfo)
 		{
 			if(addedText.Any()) {
-				if(string.IsNullOrEmpty(this._textValue)) {
-					this._textValue = addedText;
+				if(string.IsNullOrEmpty(this.HiddentTextValue)) {
+					this.HiddentTextValue = addedText;
 				} else {
-					this._textValue = this._textValue
+					this.HiddentTextValue = this.HiddentTextValue
 						.Insert(changeInfo.Offset, addedText);
 				}
 			}
@@ -132,16 +132,16 @@ namespace BogdaroneGest.UserControls
 			}
 		}
 
-		protected override void SwitchToInteractiveMode()
+		protected override void OnInteractiveModeSwitch()
 		{
-			base.SwitchToInteractiveMode();
+			base.OnInteractiveModeSwitch();
 			this._interactiveMode = true;
 		}
 
-		protected override void SwitchToFreeMode()
+		protected override void OnFreeModeSwitch()
 		{
 			this._interactiveMode = false;
-			base.SwitchToFreeMode();
+			base.OnFreeModeSwitch();
 		}
 
 
