@@ -102,9 +102,7 @@ namespace BogdaroneGest.UserControls
 			}
 		}
 
-		void ApplyAddedText(
-			string addedText, 
-			TextChange changeInfo)
+		void ApplyAddedText(string addedText, TextChange changeInfo)
 		{
 			if(addedText.Any()) {
 				if(string.IsNullOrEmpty(this._textValue)) {
