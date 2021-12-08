@@ -1,0 +1,22 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BogdaroneGest"
+		xmlns:UserControls="clr-namespace:BogdaroneGest.UserControls"
+		x:Class="BogdaroneGest.LoginWindow"
+        mc:Ignorable="d"
+        Title="Bogdarone Gest Login" Height="200" Width="340" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+	<Grid>
+		<Button x:Name="btn_login" Content="Login" HorizontalAlignment="Left" Height="29" Margin="32,120,0,0" VerticalAlignment="Top" Width="125" Click="btn_login_Click"/>
+		<Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Left" Height="29" Margin="177,120,0,0" VerticalAlignment="Top" Width="125" Click="btn_cancel_Click"/>
+		<CheckBox x:Name="cbx_remember" Content="Remember on this device" HorizontalAlignment="Left" Margin="32,93,0,0" VerticalAlignment="Top"/>
+
+		<UserControls:LoginWindowTextField x:Name="field_userName" HorizontalAlignment="Left" Height="25" Margin="32,15,0,0" Text="User Name" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalContentAlignment="Center"/>
+		<UserControls:LoginWindowPasswordField x:Name="field_password" HorizontalAlignment="Left" Margin="32,54,0,0" Text="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="25" VerticalContentAlignment="Center" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+		<!--<UserControls:LoginWindowTextField x:Name="field_password" HorizontalAlignment="Left" Margin="32,54,0,0" Text="Password" TextWrapping="Wrap" VerticalAlignment="Top" Width="270" Height="25" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" VerticalContentAlignment="Center"/>-->
+		<!--<UserControls:LoginWindowField HorizontalAlignment="Left" Margin="32,18,0,0" VerticalAlignment="Top" Height="26" Width="270" />-->
+
+	</Grid>
+</Window>
