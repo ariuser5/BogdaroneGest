@@ -4,9 +4,196 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BogdaroneGest.Views"
+		xmlns:UserControls="clr-namespace:BogdaroneGest.UserControls"
         mc:Ignorable="d"
-        Title="Bogdarone Gest Main" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
-        
-    </Grid>
+        Title="Bogdarone Gest Main" 
+		Height="212"
+		MinHeight="130"
+		Width="320"
+		MinWidth="200"
+		WindowStartupLocation="CenterScreen">
+	<Grid x:Name="mainLayoutPanel">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid x:Name="topLayoutPanel" Grid.Row="0">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			
+			<StackPanel x:Name="topLayoutPanelLeft" 
+						Grid.Column="0" 
+						Orientation="Horizontal" 
+						Margin="0 2 0 0">
+
+				<Button Content="File" Padding="5 0" >
+					<Button.BorderBrush>
+						<SolidColorBrush Color="#FF707070" Opacity="0.1"/>
+					</Button.BorderBrush>
+					<Button.Background>
+						<SolidColorBrush Color="#FFDDDDDD" Opacity="0.1"/>
+					</Button.Background>
+				</Button>
+				<Button Content="Edit" Padding="5 0">
+					<Button.BorderBrush>
+						<SolidColorBrush Color="#FF707070" Opacity="0.1"/>
+					</Button.BorderBrush>
+					<Button.Background>
+						<SolidColorBrush Color="#FFDDDDDD" Opacity="0.1"/>
+					</Button.Background>
+				</Button>
+				<Button Content="Help" Padding="5 0">
+					<Button.BorderBrush>
+						<SolidColorBrush Color="#FF707070" Opacity="0.1"/>
+					</Button.BorderBrush>
+					<Button.Background>
+						<SolidColorBrush Color="#FFDDDDDD" Opacity="0.1"/>
+					</Button.Background>
+				</Button>
+
+			</StackPanel>
+
+			<StackPanel x:Name="topLayoutPanelRight" 
+						Grid.Column="1" 
+						Orientation="Horizontal" 
+						FlowDirection="RightToLeft" 
+						Margin="0 2 10 0">
+
+				<Button Content="User"
+						Padding="10 0">
+					
+				</Button>
+				
+			</StackPanel>
+
+		</Grid>
+
+		<Separator Grid.Row="1" />
+
+		<Grid x:Name="middleLayoutPanel" Grid.Row="2">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid>
+
+				<Grid.Background>
+					<SolidColorBrush Color="LightGray" />
+				</Grid.Background>
+				
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<StackPanel x:Name="toolBoxPanel"
+						Grid.Column="0"
+						Margin="5">
+
+					<Button Content="Button1"
+						Margin="0 5"/>
+
+					<Button Content="Button2"
+						Margin="0 5"/>
+
+				</StackPanel>
+
+				<Rectangle Grid.Column="1" 
+					   VerticalAlignment="Stretch"
+					   Width="2"
+					   Margin="2 0"
+					   Stroke="#FFA0A0A0"/>
+
+			</Grid>
+
+			<Grid Grid.Column="2">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<Grid Grid.Row="0">
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+
+					<Button Grid.Column="0" 
+							Padding="2 0"
+							Margin="2 2 5 2">
+						Filters
+					</Button>
+
+					<Button Grid.Column="1" 
+							Padding="2 0"
+							Margin="2 2">
+						Search
+					</Button>
+
+					<UserControls:LoginWindowTextField
+						Grid.Column="2"
+						VerticalContentAlignment="Center"
+						Margin="2 0"
+						Foreground="Gray">
+						Type
+					</UserControls:LoginWindowTextField>
+
+					<Button Grid.Column="3"
+							Margin="2 0">
+						::
+					</Button>
+					
+				</Grid>
+
+				<Separator Grid.Row="1"/>
+
+				<DockPanel Grid.Row="2" 
+						   Background="Orange" 
+						   LastChildFill="True">
+
+					<Button Content="Button1"
+							DockPanel.Dock="Left"
+							VerticalAlignment="Center"/>
+
+					<TextBox TextWrapping="Wrap" 
+							VerticalScrollBarVisibility="Visible"
+							Width="Auto">
+					</TextBox>
+
+				</DockPanel>
+
+			</Grid>
+		</Grid>
+
+		<Separator Grid.Row="3" />
+
+		<Grid Grid.Row="4">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Column="0" Text="StatusBar"/>
+			<TextBlock Grid.Column="1" Text="Middle"/>
+			<TextBlock Grid.Column="2" Text="SomeInfo"/>
+
+		</Grid>
+
+	</Grid>
 </Window>

@@ -2,17 +2,20 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace BogdaroneGest.UserControls
 {
 	class LoginWindowTextField: TextBox
 	{
 
+		string _initialText;
+		Brush _initialTextColor;
 
 		public LoginWindowTextField()
 		{
-			this.InteractiveModeSwitchHandler = () => { return; };
-			this.FreeModeSwitchHandler = () => { return; };
+			this.InteractiveModeSwitchHandler = this.DefaultInteractiveMode;
+			this.FreeModeSwitchHandler = this.DefaultFreeMode;
 		}
 
 
@@ -23,6 +26,36 @@ namespace BogdaroneGest.UserControls
 		[Browsable(false)]
 		public Action FreeModeSwitchHandler { get; set; }
 
+
+		protected override void OnInitialized(EventArgs e)
+		{
+			base.OnInitialized(e);
+			this.ReadDefaults();
+		}
+
+		private void ReadDefaults()
+		{
+			this._initialText = this.Text;
+			this._initialTextColor = this.Foreground;
+		}
+
+		private void DefaultInteractiveMode()
+		{
+			if(string.Equals(this.Text, this._initialText)) {
+				this.Text = string.Empty;
+			}
+
+			this.Foreground = Brushes.Black;
+		}
+
+		private void DefaultFreeMode()
+		{
+			if(string.IsNullOrWhiteSpace(this.Text)) {
+				this.Text = this._initialText;
+			}
+			
+			this.Foreground = this._initialTextColor;
+		}
 
 
 		public void ToggleInteractiveMode(bool value)
