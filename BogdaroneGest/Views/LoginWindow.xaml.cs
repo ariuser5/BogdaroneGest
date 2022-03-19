@@ -18,7 +18,7 @@ namespace BogdaroneGest
 		{
 			this.InitializeComponent();
 			this.InitializeCustomComponents();
-			this.ImportRememberedData();
+			//this.ImportRememberedData();
 		}
 
 
@@ -65,38 +65,41 @@ namespace BogdaroneGest
 			//	}
 			//};
 
-			this.field_password.ValidInputTextHandler = (text) => {
-				this.field_password.BorderBrush
-					= presetPasswordFieldBorderBrush;
-			};
+			//this.field_password.ValidInputTextHandler = (text) => {
+			//	this.field_password.BorderBrush
+			//		= presetPasswordFieldBorderBrush;
+			//};
 
-			this.field_password.InvalidInputTextHandler = (text) => {
-				this.field_password.BorderBrush = Brushes.Red;
-			};
+			//this.field_password.InvalidInputTextHandler = (text) => {
+			//	this.field_password.BorderBrush = Brushes.Red;
+			//};
 		}
 
-		void ImportRememberedData()
-		{
-			if(LoginCredentials.IsRememberedLocally()) {
-				var remembered = LoginCredentials.ImportRemembered();
+		//void ImportRememberedData()
+		//{
+		//	if(LoginCredentials.IsRememberedLocally()) {
+		//		var remembered = LoginCredentials.ImportRemembered();
 
-				this.field_userName.ToggleInteractiveMode(true);
+		//		this.field_userName.ToggleInteractiveMode(true);
 
-				this.field_userName.Text = remembered.UserName;
-				this.field_password.HiddentTextValue = remembered.Password;
-				this.field_password.Text = new string(
-					c: this.field_password.PasswordChar,
-					count: remembered.Password.Length);
+		//		this.field_userName.Text = remembered.UserName;
+		//		this.field_password.HiddentTextValue = remembered.Password;
+		//		this.field_password.Text = new string(
+		//			c: this.field_password.PasswordChar,
+		//			count: remembered.Password.Length);
 
-				this.field_password.ToggleInteractiveMode(true);
+		//		this.field_password.ToggleInteractiveMode(true);
 
-				this.cbx_remember.IsChecked = true;
-			}
-		}
+		//		this.cbx_remember.IsChecked = true;
+		//	}
+		//}
 
 
 		private void btn_login_Click(object sender, RoutedEventArgs e)
 		{
+			var serviceOutput = BogdaroneAccess.UsersDao.PingService();
+			return;
+
 			//MessageBox.Show("Passowrd is: " + this.field_password._textValue);
 			if(LoginCredentials.TryCreateFrom(this, out var credentials)) {
 

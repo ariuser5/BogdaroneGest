@@ -28,11 +28,45 @@
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			
-			<StackPanel x:Name="topLayoutPanelLeft" 
-						Grid.Column="0" 
-						Orientation="Horizontal" 
-						Margin="0 2 0 0">
+
+			<!--<DockPanel x:Name="topLayoutPanelLeft">-->
+			<StackPanel 
+				x:Name="topLayoutPanelLeft" 
+				Grid.Column="0" 
+				Orientation="Horizontal" 
+				Margin="0 2 0 0">
+				
+				<Menu DockPanel.Dock="Top" FlowDirection="LeftToRight">
+
+					<Menu.ItemsPanel>
+						<ItemsPanelTemplate>
+							<DockPanel HorizontalAlignment="Stretch"/>
+						</ItemsPanelTemplate>
+					</Menu.ItemsPanel>
+					
+					<MenuItem Header="_File" FlowDirection="LeftToRight">
+						<MenuItem 
+							Header="Export PDF"
+							IsEnabled="False">
+							
+						</MenuItem>
+						<MenuItem Header="_Close"></MenuItem>
+					</MenuItem>
+					<MenuItem Header="_Settings">
+						<MenuItem Header="Language"/>
+					</MenuItem>
+					<MenuItem Header="_Help">
+
+					</MenuItem>
+				</Menu>
+			</StackPanel>
+			<!--</DockPanel>-->
+
+			<!--<StackPanel 
+				x:Name="topLayoutPanelLeft" 
+				Grid.Column="0" 
+				Orientation="Horizontal" 
+				Margin="0 2 0 0">
 
 				<Button Content="File" Padding="5 0" >
 					<Button.BorderBrush>
@@ -59,9 +93,9 @@
 					</Button.Background>
 				</Button>
 
-			</StackPanel>
+			</StackPanel>-->
 
-			<StackPanel x:Name="topLayoutPanelRight" 
+			<!--<StackPanel x:Name="topLayoutPanelRight" 
 						Grid.Column="1" 
 						Orientation="Horizontal" 
 						FlowDirection="RightToLeft" 
@@ -72,7 +106,7 @@
 					
 				</Button>
 				
-			</StackPanel>
+			</StackPanel>-->
 
 		</Grid>
 

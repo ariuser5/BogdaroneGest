@@ -16,8 +16,8 @@
 	<Border Padding="15">
 		<StackPanel>
 
-			<UserControls:LoginWindowTextField 
-				x:Name="field_userName" 
+			<UserControls:UITextField
+				x:Name="field_userName"
 				Height="25" 
 				Margin="5"
 				Text="User Name" 
@@ -25,7 +25,7 @@
 				Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
 				VerticalContentAlignment="Center"/>
 
-			<UserControls:LoginWindowPasswordField 
+			<UserControls:UIPasswordField 
 				x:Name="field_password" 
 				Text="Password" 
 				TextWrapping="Wrap" 
@@ -34,11 +34,30 @@
 				VerticalContentAlignment="Center" 
 				Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
 
-			<CheckBox x:Name="cbx_remember" 
-					  Content="Remember on this device" 
-					  HorizontalAlignment="Left" 
-					  VerticalAlignment="Top"
-					  Margin="5" />
+			<!--<UserControls:LoginWindowTextField 
+				x:Name="field_userName" 
+				Height="25" 
+				Margin="5"
+				Text="User Name" 
+				TextWrapping="Wrap" 
+				Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+				VerticalContentAlignment="Center"/>-->
+
+			<!--<UserControls:LoginWindowPasswordField 
+				x:Name="field_password" 
+				Text="Password" 
+				TextWrapping="Wrap" 
+				Height="25" 
+				Margin="5"
+				VerticalContentAlignment="Center" 
+				Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>-->
+
+			<CheckBox 
+				x:Name="cbx_remember" 
+				Content="Remember on this device" 
+				HorizontalAlignment="Left" 
+				VerticalAlignment="Top"
+				Margin="5" />
 
 			<Grid Height="30" Margin="5">
 
