@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "SqlDbQuery": {
+      "commandName": "Project"
+    }
+  }
+}

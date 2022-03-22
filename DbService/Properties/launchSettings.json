@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DbService": {
+      "commandName": "Project",
+      "commandLineArgs": "26952"
+    }
+  }
+}

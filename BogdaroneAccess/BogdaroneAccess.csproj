@@ -5,19 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DbService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="DbService.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BogdaroneDBService\BogdaroneDBService.csproj" />
+    <ProjectReference Include="..\BogdaroneDBService\SqlDbQuery.csproj" />
     <ProjectReference Include="..\DBEntities\DBEntities.csproj" />
   </ItemGroup>
 

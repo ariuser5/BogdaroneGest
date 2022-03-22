@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BogdaroneGest", "BogdaroneGest\BogdaroneGest.csproj", "{0D9DD721-4D40-476B-AA5C-A317F25B3BF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBEntities", "DBEntities\DBEntities.csproj", "{5D80B7E2-2BC6-4D56-BBC9-BF693EEADD3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBEntities", "DBEntities\DBEntities.csproj", "{5D80B7E2-2BC6-4D56-BBC9-BF693EEADD3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BogdaroneAccess", "BogdaroneAccess\BogdaroneAccess.csproj", "{B7CA7965-1B04-4E62-BB12-A3D1B79B25B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BogdaroneAccess", "BogdaroneAccess\BogdaroneAccess.csproj", "{B7CA7965-1B04-4E62-BB12-A3D1B79B25B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BogdaroneDBService", "BogdaroneDBService\BogdaroneDBService.csproj", "{8A891F5B-9B36-4D8A-AC6C-310DFB7121FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DbService", "DbService\DbService.csproj", "{40B766F6-B12E-4F2A-B9CF-F7369E43C43C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlDbQuery", "SqlDbQuery\SqlDbQuery.csproj", "{3ECED998-12D0-4A1A-BB92-27D7AC35E911}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,14 @@ Global
 		{B7CA7965-1B04-4E62-BB12-A3D1B79B25B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7CA7965-1B04-4E62-BB12-A3D1B79B25B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7CA7965-1B04-4E62-BB12-A3D1B79B25B7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A891F5B-9B36-4D8A-AC6C-310DFB7121FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A891F5B-9B36-4D8A-AC6C-310DFB7121FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A891F5B-9B36-4D8A-AC6C-310DFB7121FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A891F5B-9B36-4D8A-AC6C-310DFB7121FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B766F6-B12E-4F2A-B9CF-F7369E43C43C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B766F6-B12E-4F2A-B9CF-F7369E43C43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B766F6-B12E-4F2A-B9CF-F7369E43C43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B766F6-B12E-4F2A-B9CF-F7369E43C43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3ECED998-12D0-4A1A-BB92-27D7AC35E911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ECED998-12D0-4A1A-BB92-27D7AC35E911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ECED998-12D0-4A1A-BB92-27D7AC35E911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ECED998-12D0-4A1A-BB92-27D7AC35E911}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
