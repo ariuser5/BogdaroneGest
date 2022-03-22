@@ -11,7 +11,6 @@ namespace DbService
 		const string DEFAULT_QUIT_COMMAND = "quit";
 		const int MAX_WAIT_TIME = 5000;
 
-		//static string m_output = string.Empty;
 
 		/// <summary>
 		/// args[0] - master process id
@@ -23,7 +22,7 @@ namespace DbService
 		{
 			Console.WriteLine($"Inside {nameof(DbService)}");
 
-			var masterProcessId = int.Parse(args[0]);
+			var masterProcessId = ParseProcessId(args);
 			var quitCommand = ParseQuitCommandArg(args);
 			var refreshRate = ParseRefreshRateArg(args);
 
@@ -35,6 +34,17 @@ namespace DbService
 				refreshRate: refreshRate);
 
 			instance.Run();
+		}
+
+		static int ParseProcessId(string[] args)
+		{
+			if(args.Length >= 1) {
+				var pid = int.Parse(args[0]);
+
+				return pid;
+			}
+
+			return Process.GetCurrentProcess().Id;
 		}
 
 		static string ParseQuitCommandArg(string[] args)
@@ -57,10 +67,6 @@ namespace DbService
 			return new RefreshRate();
 		}
 
-
-
-
-		//readonly MemoryStream _;
 
 
 		readonly StringBuilder _buffer;
@@ -93,10 +99,12 @@ namespace DbService
 
 		Process StartSqlConnection()
 		{
+			const string SYNC_FLAG = "READY";
+
 			var startInfo = new ProcessStartInfo()
 			{
 				FileName = "SqlDbQuery.exe",
-				Arguments = "",
+				Arguments = SYNC_FLAG,
 				UseShellExecute = false,
 				RedirectStandardInput = true,
 				RedirectStandardOutput = true,
@@ -110,12 +118,12 @@ namespace DbService
 			};
 
 
-			this.StartAndSyncConnection(process);
+			this.StartAndSyncConnection(process, SYNC_FLAG);
 
 			return process;
 		}
 
-		void StartAndSyncConnection(Process process)
+		void StartAndSyncConnection(Process process, string syncFlag)
 		{
 			var isInit = false;
 			var waiter = Task.Run(WaitForSyncMessage);
@@ -140,7 +148,7 @@ namespace DbService
 			{
 				this._buffer.AppendLine(e.Data);
 
-				if(e.Data == "ready") {
+				if(e.Data == syncFlag) {
 					isInit = true;
 				}
 			}
@@ -153,18 +161,23 @@ namespace DbService
 
 			while(this._master.HasExited == false) {
 
-				switch(readCommandTask.Status) {
-					case TaskStatus.Created:
-						var drain = this.DrainConnectionProgramOutput();
+				if(readCommandTask.Status == TaskStatus.RanToCompletion) {
+					
+					this.RunCommand(connection, cmd);
 
-						Console.Write(drain);
-						readCommandTask.Start();
+					if(connection.HasExited) {
+						Console.WriteLine("Sql connection is closed. Exiting...");
 						break;
-
-					case TaskStatus.RanToCompletion:
-						this.RunCommand(connection, cmd);
+					} else {
 						readCommandTask = new Task(ReadCommand);
-						break;
+						cmd = null;
+					}
+
+				} else if(readCommandTask.Status == TaskStatus.Created) {
+					var drain = this.DrainConnectionProgramOutput();
+
+					Console.Write(drain);
+					readCommandTask.Start();
 				}
 
 				System.Threading.Thread.Sleep(this._refreshRate);

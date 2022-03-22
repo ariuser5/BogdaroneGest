@@ -11,10 +11,15 @@ namespace SqlDbQuery
 		{
 			//System.Diagnostics.Debugger.Launch();
 			Console.WriteLine($"Inside {nameof(SqlDbQuery)}");
-			Console.WriteLine("ready");
+
+			var initFlag = args.Length >= 1 ? args[0] : null;
 
 			using(var connection = GetConnection()) {
 				var program = new Program(connection);
+
+				if(initFlag is null == false) {
+					Console.WriteLine(initFlag);
+				}
 
 				program.Execute();
 			}
