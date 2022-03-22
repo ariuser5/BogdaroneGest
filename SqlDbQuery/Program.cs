@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* This program is a console application which listens for input as SQL commands to
+ * query the database and returns the output as json format.
+ */
+
+using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using Newtonsoft.Json.Linq;

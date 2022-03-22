@@ -1,4 +1,14 @@
-﻿using System;
+﻿/* This assembly is meant to execute as a bridge between a master process, which represents 
+ * the requester, and another process which does the database querying and responds to requests. 
+ * The purpose of it is to ensure that when the master process is terminated, all the connections,
+ * opened streams or unmanaged code exections are terminated safely. To achieve this, the entry point 
+ * receives the master process id as argument which is used to constantly monitor if the process
+ * is still active. If the master process is terminated, then a safe shutdown command is passed
+ * to the responder process and proper clean-up is ensured before full termination.
+ * This process is designed to be started as child process.
+ */
+
+using System;
 using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
